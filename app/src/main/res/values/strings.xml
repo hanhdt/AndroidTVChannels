@@ -7,4 +7,6 @@
     <string name="live_tab_title">LIVE</string>
     <string name="upcoming_tab_title">UPCOMING</string>
     <string name="popular_tab_title">POPULAR</string>
+
+    <string name="empty_response_message">Sorry, there is nothing!</string>
 </resources>

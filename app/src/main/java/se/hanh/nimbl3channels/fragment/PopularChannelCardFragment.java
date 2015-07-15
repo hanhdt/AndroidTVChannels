@@ -66,7 +66,7 @@ public class PopularChannelCardFragment extends Fragment implements SwipeRefresh
     private List<ChannelCard> channelList;
 
     // initially offset will be 0, later will be updated while parsing the json
-    private int offSet = 0;
+    private int offSet = 1;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -218,6 +218,11 @@ public class PopularChannelCardFragment extends Fragment implements SwipeRefresh
                             }
                             ++offSet;
                             adapter.notifyDataSetChanged();
+                        }
+                        else{
+                            Toast.makeText(NimbleApplication.getInstance().getApplicationContext(),
+                                    getResources().getString(R.string.empty_response_message), Toast.LENGTH_LONG).show();
+
                         }
 
                         // stopping swipe refresh

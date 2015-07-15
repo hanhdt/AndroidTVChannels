@@ -49,7 +49,7 @@ public class LiveChannelCardFragment extends Fragment implements
 
     private String ACCESS_TOKEN = "9008ab338d1beba78b8914124d64d461a9a9253894b29ea5cd70a0cf9c955177";
 
-    private String URL_POPULAR_CHANNEL = "http://api-staging.zeemi.tv/1/channels/popular.json?access_token=" + ACCESS_TOKEN + "&page=";
+    private String URL_LIVE_CHANNEL = "http://api-staging.zeemi.tv/1/channels/popular.json?access_token=" + ACCESS_TOKEN + "&page=";
     /**
      * The fragment's ListView/GridView.
      */
@@ -185,7 +185,7 @@ public class LiveChannelCardFragment extends Fragment implements
 
     private void loadMoreChannelFromAPI(int totalItems){
         // appending offset to url
-        String url = URL_POPULAR_CHANNEL + offSet;
+        String url = URL_LIVE_CHANNEL + offSet;
 
         // Volley's json array request object
         JsonArrayRequest req = new JsonArrayRequest(url,
@@ -219,6 +219,10 @@ public class LiveChannelCardFragment extends Fragment implements
 
                             ++offSet;
                             adapter.notifyDataSetChanged();
+                        }else{
+                            Toast.makeText(NimbleApplication.getInstance().getApplicationContext(),
+                                    getResources().getString(R.string.empty_response_message), Toast.LENGTH_LONG).show();
+
                         }
 
                         // stopping swipe refresh
@@ -265,7 +269,7 @@ public class LiveChannelCardFragment extends Fragment implements
         swipeRefreshLayout.setRefreshing(true);
 
         // appending offset to url
-        String url = URL_POPULAR_CHANNEL + offSet;
+        String url = URL_LIVE_CHANNEL + offSet;
 
         // Volley's json array request object
         JsonArrayRequest req = new JsonArrayRequest(url,
@@ -299,6 +303,11 @@ public class LiveChannelCardFragment extends Fragment implements
                             }
                             ++offSet;
                             adapter.notifyDataSetChanged();
+                        }
+                        else{
+                            Toast.makeText(NimbleApplication.getInstance().getApplicationContext(),
+                                    getResources().getString(R.string.empty_response_message), Toast.LENGTH_LONG).show();
+
                         }
 
                         // stopping swipe refresh

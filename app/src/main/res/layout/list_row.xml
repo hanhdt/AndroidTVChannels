@@ -78,7 +78,7 @@
             <ImageView
                 android:layout_width="30dip"
                 android:layout_height="30dip"
-                android:src="@android:drawable/star_big_on"/>
+                android:src="@drawable/ic_action"/>
 
             <TextView
                 android:id="@+id/follower_count"
