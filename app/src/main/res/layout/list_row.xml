@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/list_selector">
+
+    <ImageView
+        android:id="@+id/channel_cover_image"
+        android:layout_width="fill_parent"
+        android:layout_height="240dp"
+        android:scaleType="fitXY"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#80000000">
+
+        <se.hanh.nimbl3channels.util.RoundedImageView
+            android:id="@+id/channel_user_avatar"
+            android:layout_width="48dip"
+            android:layout_height="48dip"
+            android:src="@drawable/placeholder"
+            android:padding="3dip"
+            android:layout_margin="25dip"
+            />
+
+        <TextView
+            android:id="@+id/channel_name"
+            android:layout_toRightOf="@id/channel_user_avatar"
+            android:text="@string/app_name"
+            android:textColor="@android:color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:textSize="18sp"
+            android:layout_marginTop="3dp" />
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_toRightOf="@id/channel_user_avatar"
+            android:layout_below="@id/channel_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/app_name"
+            android:textColor="@android:color/white"
+            android:paddingTop="10dp"
+            android:textSize="14sp"/>
+
+        <RatingBar android:id="@+id/rating_bar"
+            android:layout_toRightOf="@id/channel_user_avatar"
+            android:layout_below="@id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:stepSize="1.0"
+            style="?android:attr/ratingBarStyleSmall"
+            android:isIndicator="true"
+            android:layout_alignParentRight="false"
+            android:layout_alignParentBottom="false"
+            android:layout_alignParentTop="false"
+            android:layout_marginTop="15dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_toRightOf="@id/rating_bar"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/user_name"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="30dip"
+                android:layout_height="30dip"
+                android:src="@android:drawable/star_big_on"/>
+
+            <TextView
+                android:id="@+id/follower_count"
+                android:textColor="@android:color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="@string/app_name"
+                android:paddingLeft="5dp"
+                android:paddingTop="10dp"
+                android:textSize="14dp"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!--  ListRow Left side Thumbnail image -->
+
+
+</RelativeLayout>

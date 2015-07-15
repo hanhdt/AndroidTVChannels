@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ZEEMI.TV</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="live_tab_title">LIVE</string>
+    <string name="upcoming_tab_title">UPCOMING</string>
+    <string name="popular_tab_title">POPULAR</string>
+</resources>
