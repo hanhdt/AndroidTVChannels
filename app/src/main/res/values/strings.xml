@@ -8,5 +8,7 @@
     <string name="upcoming_tab_title">UPCOMING</string>
     <string name="popular_tab_title">POPULAR</string>
 
-    <string name="empty_response_message">Nothing is new!</string>
+    <string name="empty_response_message">There are no new channels!</string>
+    <string name="no_connection_message">Failed loading data! Try check connection!</string>
+    <string name="failed_fetched_data_message">Failed loading data! Try again!</string>
 </resources>

@@ -35,6 +35,7 @@ import se.hanh.nimbl3channels.R;
 import se.hanh.nimbl3channels.adapter.SwipeChannelCardAdapter;
 import se.hanh.nimbl3channels.app.NimbleApplication;
 import se.hanh.nimbl3channels.util.ChannelCard;
+import se.hanh.nimbl3channels.util.CommonHelper;
 import se.hanh.nimbl3channels.util.InfiniteScrollListener;
 
 /**
@@ -238,7 +239,8 @@ public class PopularChannelCardFragment extends Fragment implements SwipeRefresh
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Server Error: " + error.getMessage());
 
-                Toast.makeText(NimbleApplication.getInstance().getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                CommonHelper.showAlertDialog(getActivity(),
+                        getString(R.string.failed_fetched_data_message));
 
                 // stopping swipe refresh
                 swipeRefreshLayout.setRefreshing(false);
@@ -329,7 +331,8 @@ public class PopularChannelCardFragment extends Fragment implements SwipeRefresh
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Server Error: " + error.getMessage());
 
-                Toast.makeText(NimbleApplication.getInstance().getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                CommonHelper.showAlertDialog(getActivity(),
+                        getString(R.string.failed_fetched_data_message));
 
                 // stopping swipe refresh
                 swipeRefreshLayout.setRefreshing(false);

@@ -1,6 +1,7 @@
 package se.hanh.nimbl3channels.fragment;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -31,6 +32,7 @@ import se.hanh.nimbl3channels.R;
 import se.hanh.nimbl3channels.adapter.SwipeChannelCardAdapter;
 import se.hanh.nimbl3channels.app.NimbleApplication;
 import se.hanh.nimbl3channels.util.ChannelCard;
+import se.hanh.nimbl3channels.util.CommonHelper;
 import se.hanh.nimbl3channels.util.InfiniteScrollListener;
 
 /**
@@ -49,7 +51,7 @@ public class LiveChannelCardFragment extends Fragment implements
 
     private String ACCESS_TOKEN = "9008ab338d1beba78b8914124d64d461a9a9253894b29ea5cd70a0cf9c955177";
 
-    private String URL_LIVE_CHANNEL = "http://api-staging.zeemi.tv/1/channels/popular.json?access_token=" + ACCESS_TOKEN + "&page=";
+    private String URL_LIVE_CHANNEL = "http://api-staging.zeemi.tv/1/channels/live.json?access_token=" + ACCESS_TOKEN + "&page=";
     /**
      * The fragment's ListView/GridView.
      */
@@ -126,7 +128,14 @@ public class LiveChannelCardFragment extends Fragment implements
             public void onLoadMore(int page, int totalItemsCount) {
                 // Triggered only when new data needs to be appended to the list
                 Log.d(LiveChannelCardFragment.TAG, "Page + Total Items: " + page + "+" + totalItemsCount);
-                loadMoreChannelFromAPI(offSet, totalItemsCount);
+                // Check connection first
+                if(CommonHelper.hasConnection()){
+                    loadMoreChannelFromAPI(offSet, totalItemsCount);
+                }
+                else{
+                    CommonHelper.showAlertDialog(getActivity().getApplicationContext(),
+                            getString(R.string.no_connection_message));
+                }
             }
         });
         swipeRefreshLayout.setOnRefreshListener(this);
@@ -138,9 +147,17 @@ public class LiveChannelCardFragment extends Fragment implements
         swipeRefreshLayout.post(new Runnable() {
                                     @Override
                                     public void run() {
+
                                         swipeRefreshLayout.setRefreshing(true);
 
-                                        fetchChannels();
+                                        // Check connection first
+                                        if(CommonHelper.hasConnection()){
+                                            fetchChannels();
+                                        }
+                                        else{
+                                            CommonHelper.showAlertDialog(getActivity(),
+                                                    getString(R.string.no_connection_message));
+                                        }
                                     }
                                 }
         );
@@ -180,7 +197,15 @@ public class LiveChannelCardFragment extends Fragment implements
 
     @Override
     public void onRefresh() {
-        fetchChannels();
+        // Check connection first
+        if(CommonHelper.hasConnection()){
+            fetchChannels();
+        }
+        else{
+            CommonHelper.showAlertDialog(getActivity(),
+                    getString(R.string.no_connection_message));
+        }
+
     }
 
     /**
@@ -240,10 +265,13 @@ public class LiveChannelCardFragment extends Fragment implements
                     public void onErrorResponse(VolleyError error) {
                         Log.e(TAG, "Server Error: " + error.getMessage());
 
-                        Toast.makeText(NimbleApplication.getInstance().getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
-
                         // stopping swipe refresh
                         swipeRefreshLayout.setRefreshing(false);
+
+                        CommonHelper.showAlertDialog(getActivity(),
+                                getString(R.string.failed_fetched_data_message));
+
+
                     }
                 }){
                     /**
@@ -326,10 +354,13 @@ public class LiveChannelCardFragment extends Fragment implements
                     public void onErrorResponse(VolleyError error) {
                         Log.e(TAG, "Server Error: " + error.getMessage());
 
-                        Toast.makeText(NimbleApplication.getInstance().getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
-
                         // stopping swipe refresh
                         swipeRefreshLayout.setRefreshing(false);
+
+                        CommonHelper.showAlertDialog(getActivity(),
+                                getString(R.string.failed_fetched_data_message));
+
+
                     }
                 }){
                     /**

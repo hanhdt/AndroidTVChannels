@@ -1,6 +1,7 @@
 package se.hanh.nimbl3channels.app;
 
 import android.app.Application;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.util.LruCache;
@@ -18,11 +19,14 @@ public class NimbleApplication extends Application {
     private ImageLoader mImageLoader;
     private RequestQueue mRequestQueue;
 
+    private static Context mContext;
     private static NimbleApplication mInstance;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        mContext = getApplicationContext();
+
         mInstance = this;
 
         mImageLoader = new ImageLoader(mRequestQueue,
@@ -51,6 +55,10 @@ public class NimbleApplication extends Application {
             mInstance = new NimbleApplication();
         }
         return mInstance;
+    }
+
+    public static Context getContext(){
+        return mContext;
     }
 
     /**
