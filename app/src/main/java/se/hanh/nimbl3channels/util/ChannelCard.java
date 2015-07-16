@@ -10,6 +10,7 @@ public class ChannelCard {
     private String username;
     private int rating;
     private int numOfFollowers;
+    private int typeOfChannel; // Define type of channels follow to 1-LIVE; 2-UPCOMING; 3-POPULAR
 
     public ChannelCard(String coverImage, String channelName, String username, int rating, int followersCount, String profilePic) {
         this.coverImage = coverImage;
@@ -26,13 +27,22 @@ public class ChannelCard {
     }
 
     public ChannelCard(String coverImage, String userAvatar, String channelName,
-                       String username, int rating, int numOfFollowers) {
+                       String username, int rating, int numOfFollowers, int typeOfChannel) {
         this.coverImage = coverImage;
         this.userAvatar = userAvatar;
         this.channelName = channelName;
         this.username = username;
         this.rating = rating;
         this.numOfFollowers = numOfFollowers;
+        this.typeOfChannel = typeOfChannel;
+    }
+
+    public int getTypeOfChannel() {
+        return typeOfChannel;
+    }
+
+    public void setTypeOfChannel(int typeOfChannel) {
+        this.typeOfChannel = typeOfChannel;
     }
 
     public String getCoverImage() {

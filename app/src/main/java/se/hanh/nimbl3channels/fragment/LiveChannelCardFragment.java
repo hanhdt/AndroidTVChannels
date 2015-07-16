@@ -126,7 +126,7 @@ public class LiveChannelCardFragment extends Fragment implements
             public void onLoadMore(int page, int totalItemsCount) {
                 // Triggered only when new data needs to be appended to the list
                 Log.d(LiveChannelCardFragment.TAG, "Page + Total Items: " + page + "+" + totalItemsCount);
-                loadMoreChannelFromAPI(offSet);
+                loadMoreChannelFromAPI(offSet, totalItemsCount);
             }
         });
         swipeRefreshLayout.setOnRefreshListener(this);
@@ -183,7 +183,12 @@ public class LiveChannelCardFragment extends Fragment implements
         fetchChannels();
     }
 
-    private void loadMoreChannelFromAPI(int totalItems){
+    /**
+     *
+     * @param pageIndex
+     * @param totalItems
+     */
+    private void loadMoreChannelFromAPI(int pageIndex, int totalItems){
         // appending offset to url
         String url = URL_LIVE_CHANNEL + offSet;
 
@@ -217,12 +222,13 @@ public class LiveChannelCardFragment extends Fragment implements
                                 }
                             }
 
-                            ++offSet;
+                            ++offSet; // increase page index
                             adapter.notifyDataSetChanged();
                         }else{
                             Toast.makeText(NimbleApplication.getInstance().getApplicationContext(),
                                     getResources().getString(R.string.empty_response_message), Toast.LENGTH_LONG).show();
 
+                            setEmptyText("Channel is empty.");
                         }
 
                         // stopping swipe refresh
@@ -301,13 +307,14 @@ public class LiveChannelCardFragment extends Fragment implements
                                     Log.e(TAG, "JSON Parsing error: " + e.getMessage());
                                 }
                             }
-                            ++offSet;
+                            ++offSet; // increase page index
                             adapter.notifyDataSetChanged();
                         }
                         else{
                             Toast.makeText(NimbleApplication.getInstance().getApplicationContext(),
                                     getResources().getString(R.string.empty_response_message), Toast.LENGTH_LONG).show();
 
+                            setEmptyText("Channel is empty.");
                         }
 
                         // stopping swipe refresh

@@ -36,6 +36,7 @@ import se.hanh.nimbl3channels.adapter.SwipeChannelCardAdapter;
 import se.hanh.nimbl3channels.app.NimbleApplication;
 import se.hanh.nimbl3channels.fragment.dummy.DummyContent;
 import se.hanh.nimbl3channels.util.ChannelCard;
+import se.hanh.nimbl3channels.util.InfiniteScrollListener;
 
 /**
  * A fragment representing a list of Items.
@@ -121,6 +122,16 @@ public class UpcommingChannelCardFragment extends Fragment implements SwipeRefre
         // Set the adapter
         mListView.setAdapter(adapter);
 
+        // attach the listener to the AdapterView onCreate
+        mListView.setOnScrollListener(new InfiniteScrollListener() {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+                // Triggered only when new data needs to be appended to the list
+                Log.d(LiveChannelCardFragment.TAG, "Page + Total Items: " + page + "+" + totalItemsCount);
+                loadMoreChannelFromAPI(offSet, totalItemsCount);
+            }
+        });
+
         swipeRefreshLayout.setOnRefreshListener(this);
 
         /**
@@ -168,6 +179,89 @@ public class UpcommingChannelCardFragment extends Fragment implements SwipeRefre
         if (emptyView instanceof TextView) {
             ((TextView) emptyView).setText(emptyText);
         }
+    }
+
+    /**
+     *
+     * @param pageIndex
+     * @param totalItems
+     */
+    private void loadMoreChannelFromAPI(int pageIndex, int totalItems){
+        // appending offset to url
+        String url = URL_UPCOMING_CHANNEL + offSet;
+
+        // Volley's json array request object
+        JsonArrayRequest req = new JsonArrayRequest(url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.d(LiveChannelCardFragment.TAG, response.toString());
+
+                        if (response.length() > 0) {
+
+                            // looping through json and adding to movies list
+                            for (int i = 0; i < response.length(); i++) {
+                                try {
+                                    JSONObject channelObj = response.getJSONObject(i);
+
+                                    String coverImage = channelObj.getString("cover_image");
+                                    int rating = channelObj.getInt("rating");
+                                    String title = channelObj.getString("name");
+                                    int followers = channelObj.getInt("followers_count");
+                                    JSONObject userInfo = channelObj.getJSONObject("user");
+                                    String username = userInfo.getString("username");
+                                    String profilePic = userInfo.getString("profile_picture");
+                                    ChannelCard m = new ChannelCard(coverImage, title, username, rating, followers, profilePic);
+
+                                    channelList.add(m);
+
+                                } catch (JSONException e) {
+                                    Log.e(TAG, "JSON Parsing error: " + e.getMessage());
+                                }
+                            }
+
+                            ++offSet; // increase page index
+                            adapter.notifyDataSetChanged();
+                        }else{
+                            Toast.makeText(NimbleApplication.getInstance().getApplicationContext(),
+                                    getResources().getString(R.string.empty_response_message), Toast.LENGTH_LONG).show();
+
+                            setEmptyText("Channel is empty.");
+                        }
+
+                        // stopping swipe refresh
+                        swipeRefreshLayout.setRefreshing(false);
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Server Error: " + error.getMessage());
+
+                Toast.makeText(NimbleApplication.getInstance().getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+
+                // stopping swipe refresh
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        }){
+            /**
+             * Returns a Map of parameters to be used for a POST or PUT request.  Can throw
+             * {@link AuthFailureError} as authentication may be required to provide these values.
+             * <p/>
+             * <p>Note that you can directly override {@link #getBody()} for custom data.</p>
+             *
+             * @throws AuthFailureError in the event of auth failure
+             */
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("access_token", ACCESS_TOKEN);
+                return params;
+            }
+        };
+
+        // Adding request to request queue
+        NimbleApplication.getInstance().addToRequestQueue(req);
     }
 
     @Override
@@ -223,6 +317,7 @@ public class UpcommingChannelCardFragment extends Fragment implements SwipeRefre
                             Toast.makeText(NimbleApplication.getInstance().getApplicationContext(),
                                     getResources().getString(R.string.empty_response_message), Toast.LENGTH_LONG).show();
 
+                            setEmptyText("Channel is empty.");
                         }
 
                         // stopping swipe refresh
