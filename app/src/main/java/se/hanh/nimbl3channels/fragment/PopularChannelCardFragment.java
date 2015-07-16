@@ -118,7 +118,7 @@ public class PopularChannelCardFragment extends Fragment implements SwipeRefresh
 
 
         mListView = (ListView) view.findViewById(android.R.id.list);
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.live_channel_swipe_refresh_layout);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.popular_channel_swipe_refresh_layout);
         // Set the adapter
         mListView.setAdapter(adapter);
 
@@ -127,7 +127,7 @@ public class PopularChannelCardFragment extends Fragment implements SwipeRefresh
             @Override
             public void onLoadMore(int page, int totalItemsCount) {
                 // Triggered only when new data needs to be appended to the list
-                Log.d(LiveChannelCardFragment.TAG, "Page + Total Items: " + page + "+" + totalItemsCount);
+                Log.d(PopularChannelCardFragment.TAG, "Page + Total Items: " + page + "+" + totalItemsCount);
                 loadMoreChannelFromAPI(offSet, totalItemsCount);
             }
         });
@@ -195,7 +195,7 @@ public class PopularChannelCardFragment extends Fragment implements SwipeRefresh
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.d(LiveChannelCardFragment.TAG, response.toString());
+                        Log.d(PopularChannelCardFragment.TAG, response.toString());
 
                         if (response.length() > 0) {
 
@@ -270,7 +270,7 @@ public class PopularChannelCardFragment extends Fragment implements SwipeRefresh
     }
 
     /**
-     * Fetching live channel json by making http call
+     * Fetching popular channel json by making http call
      */
     private void fetchPopularChannels() {
 
@@ -285,7 +285,7 @@ public class PopularChannelCardFragment extends Fragment implements SwipeRefresh
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.d(LiveChannelCardFragment.TAG, response.toString());
+                        Log.d(PopularChannelCardFragment.TAG, response.toString());
 
                         if (response.length() > 0) {
 

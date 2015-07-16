@@ -48,6 +48,7 @@ import se.hanh.nimbl3channels.util.InfiniteScrollListener;
  * interface.
  */
 public class UpcommingChannelCardFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+
     public static final String TAG = UpcommingChannelCardFragment.class.getSimpleName();
 
     private String ACCESS_TOKEN = "9008ab338d1beba78b8914124d64d461a9a9253894b29ea5cd70a0cf9c955177";
@@ -118,7 +119,7 @@ public class UpcommingChannelCardFragment extends Fragment implements SwipeRefre
         View view = inflater.inflate(R.layout.fragment_channelcard_upcomming, container, false);
 
         mListView = (ListView) view.findViewById(android.R.id.list);
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.live_channel_swipe_refresh_layout);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.upcoming_channel_swipe_refresh_layout);
         // Set the adapter
         mListView.setAdapter(adapter);
 
@@ -127,7 +128,7 @@ public class UpcommingChannelCardFragment extends Fragment implements SwipeRefre
             @Override
             public void onLoadMore(int page, int totalItemsCount) {
                 // Triggered only when new data needs to be appended to the list
-                Log.d(LiveChannelCardFragment.TAG, "Page + Total Items: " + page + "+" + totalItemsCount);
+                Log.d(UpcommingChannelCardFragment.TAG, "Page + Total Items: " + page + "+" + totalItemsCount);
                 loadMoreChannelFromAPI(offSet, totalItemsCount);
             }
         });
@@ -195,7 +196,7 @@ public class UpcommingChannelCardFragment extends Fragment implements SwipeRefre
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.d(LiveChannelCardFragment.TAG, response.toString());
+                        Log.d(UpcommingChannelCardFragment.TAG, response.toString());
 
                         if (response.length() > 0) {
 
@@ -285,7 +286,7 @@ public class UpcommingChannelCardFragment extends Fragment implements SwipeRefre
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.d(LiveChannelCardFragment.TAG, response.toString());
+                        Log.d(UpcommingChannelCardFragment.TAG, response.toString());
 
                         if (response.length() > 0) {
 
