@@ -11,6 +11,17 @@
         android:layout_height="245dp"
         android:scaleType="fitXY"/>
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/channel_status"
+        android:layout_width="21dip"
+        android:layout_height="21dip"
+        android:padding="3dip"
+        android:layout_margin="20dip"
+        android:src="@color/error_color"
+        app:border_width="1dp"
+        app:border_color="#80FFFFFF"
+        />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,11 +31,11 @@
 
         <!--<se.hanh.nimbl3channels.util.RoundedImageView-->
             <!--android:id="@+id/channel_user_avatar"-->
-            <!--android:layout_width="48dip"-->
-            <!--android:layout_height="48dip"-->
-            <!--android:src="@drawable/placeholder"-->
+            <!--android:layout_width="52dip"-->
+            <!--android:layout_height="52dip"-->
             <!--android:padding="3dip"-->
             <!--android:layout_margin="25dip"-->
+            <!--android:src="@drawable/placeholder"-->
             <!--/>-->
 
         <de.hdodenhof.circleimageview.CircleImageView

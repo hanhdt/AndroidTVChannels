@@ -246,7 +246,8 @@ public class UpcommingChannelCardFragment extends Fragment implements SwipeRefre
                                     String username = userInfo.getString("username");
                                     String profilePic = userInfo.getString("profile_picture");
                                     ChannelCard m = new ChannelCard(coverImage, title, username, rating, followers, profilePic);
-
+                                    // Set type of channel for upcoming channels
+                                    m.setTypeOfChannel(2);
                                     channelList.add(m);
 
                                 } catch (JSONException e) {
@@ -355,7 +356,8 @@ public class UpcommingChannelCardFragment extends Fragment implements SwipeRefre
                                     int followers = channelObj.getInt("followers_count");
                                     String profilePic = userInfo.getString("profile_picture");
                                     ChannelCard m = new ChannelCard(coverImage, title, username, rating, followers, profilePic);
-
+                                    // Set type of channel for upcoming channels
+                                    m.setTypeOfChannel(2);
                                     channelList.add(0, m);
 
 

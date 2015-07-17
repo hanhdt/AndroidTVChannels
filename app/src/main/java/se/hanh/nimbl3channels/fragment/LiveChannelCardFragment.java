@@ -263,6 +263,8 @@ public class LiveChannelCardFragment extends Fragment implements
                                     String username = userInfo.getString("username");
                                     String profilePic = userInfo.getString("profile_picture");
                                     ChannelCard m = new ChannelCard(coverImage, title, username, rating, followers, profilePic);
+                                    // Set type of channel for live channels
+                                    m.setTypeOfChannel(1);
 
                                     channelList.add(m);
 
@@ -352,7 +354,8 @@ public class LiveChannelCardFragment extends Fragment implements
                                     int followers = channelObj.getInt("followers_count");
                                     String profilePic = userInfo.getString("profile_picture");
                                     ChannelCard m = new ChannelCard(coverImage, title, username, rating, followers, profilePic);
-
+                                    // Set type of channel for live channels
+                                    m.setTypeOfChannel(1);
                                     channelList.add(0, m);
 
 

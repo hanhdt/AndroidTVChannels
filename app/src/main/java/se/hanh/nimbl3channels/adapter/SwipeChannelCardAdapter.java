@@ -106,6 +106,7 @@ public class SwipeChannelCardAdapter extends BaseAdapter {
         TextView username = (TextView) convertView.findViewById(R.id.user_name);
         RatingBar mRatingBar = (RatingBar) convertView.findViewById(R.id.rating_bar);
         TextView followerCount = (TextView) convertView.findViewById(R.id.follower_count);
+        ImageView mChannelType = (ImageView) convertView.findViewById(R.id.channel_status);
 
         title.setText(channelList.get(position).getChannelName());
         username.setText(channelList.get(position).getUsername());
@@ -130,6 +131,14 @@ public class SwipeChannelCardAdapter extends BaseAdapter {
                     .placeholder(R.drawable.placeholder)
                     .error(R.drawable.placeholder)
                     .into(mChannelUserAvatar);
+        }
+
+        // Setting channel type (LIVE or not LIVE)
+        if(channelList.get(position).getTypeOfChannel() == 1){
+            mChannelType.setImageResource(android.R.color.holo_red_light);
+        }
+        else{
+            mChannelType.setImageResource(android.R.color.holo_green_dark);
         }
         return convertView;
     }
