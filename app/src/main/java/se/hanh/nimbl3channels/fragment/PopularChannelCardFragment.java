@@ -10,10 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +23,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,7 +47,8 @@ import se.hanh.nimbl3channels.util.InfiniteScrollListener;
  * Activities containing this fragment MUST implement the {@link OnFragmentInteractionListener}
  * interface.
  */
-public class PopularChannelCardFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+public class PopularChannelCardFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener,
+        AdapterView.OnItemClickListener{
     private static final String TAG = PopularChannelCardFragment.class.getSimpleName();
 
     private String ACCESS_TOKEN = "9008ab338d1beba78b8914124d64d461a9a9253894b29ea5cd70a0cf9c955177";
@@ -125,6 +124,7 @@ public class PopularChannelCardFragment extends Fragment implements SwipeRefresh
         // Set the adapter
         mListView.setAdapter(adapter);
 
+        mListView.setOnItemClickListener(this);
         // attach the listener to the Adapter View
         mListView.setOnScrollListener(new InfiniteScrollListener() {
             @Override
@@ -414,6 +414,26 @@ public class PopularChannelCardFragment extends Fragment implements SwipeRefresh
 
         // Adding request to request queue
         NimbleApplication.getInstance().addToRequestQueue(req);
+    }
+
+    /**
+     * Callback method to be invoked when an item in this AdapterView has
+     * been clicked.
+     * <p/>
+     * Implementers can call getItemAtPosition(position) if they need
+     * to access the data associated with the selected item.
+     *
+     * @param parent   The AdapterView where the click happened.
+     * @param view     The view within the AdapterView that was clicked (this
+     *                 will be a view provided by the adapter)
+     * @param position The position of the view in the adapter.
+     * @param id       The row id of the item that was clicked.
+     */
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        TextView channelTitle = (TextView) view.findViewById(R.id.channel_name);
+        Toast.makeText(getActivity(), getString(R.string.click_on_channel_message)
+                + " " + channelTitle.getText() + "! :-)", Toast.LENGTH_LONG).show();
     }
 
     /**

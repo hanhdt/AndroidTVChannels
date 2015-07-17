@@ -51,7 +51,8 @@ import se.hanh.nimbl3channels.util.InfiniteScrollListener;
  * Activities containing this fragment MUST implement the {@link OnFragmentInteractionListener}
  * interface.
  */
-public class UpcommingChannelCardFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+public class UpcommingChannelCardFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener,
+        AdapterView.OnItemClickListener{
 
     public static final String TAG = UpcommingChannelCardFragment.class.getSimpleName();
 
@@ -126,7 +127,8 @@ public class UpcommingChannelCardFragment extends Fragment implements SwipeRefre
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.upcoming_channel_swipe_refresh_layout);
         // Set the adapter
         mListView.setAdapter(adapter);
-
+        // Set onItemClick listener
+        mListView.setOnItemClickListener(this);
         // attach the listener to the AdapterView onCreate
         mListView.setOnScrollListener(new InfiniteScrollListener() {
             @Override
@@ -411,6 +413,26 @@ public class UpcommingChannelCardFragment extends Fragment implements SwipeRefre
 
         // Adding request to request queue
         NimbleApplication.getInstance().addToRequestQueue(req);
+    }
+
+    /**
+     * Callback method to be invoked when an item in this AdapterView has
+     * been clicked.
+     * <p/>
+     * Implementers can call getItemAtPosition(position) if they need
+     * to access the data associated with the selected item.
+     *
+     * @param parent   The AdapterView where the click happened.
+     * @param view     The view within the AdapterView that was clicked (this
+     *                 will be a view provided by the adapter)
+     * @param position The position of the view in the adapter.
+     * @param id       The row id of the item that was clicked.
+     */
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        TextView channelTitle = (TextView) view.findViewById(R.id.channel_name);
+        Toast.makeText(getActivity(), getString(R.string.click_on_channel_message)
+                + " " + channelTitle.getText() + "! :-)", Toast.LENGTH_LONG).show();
     }
 
     /**
