@@ -239,11 +239,14 @@ public class PopularChannelCardFragment extends Fragment implements SwipeRefresh
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Server Error: " + error.getMessage());
 
-                CommonHelper.showAlertDialog(getActivity(),
-                        getString(R.string.failed_fetched_data_message));
+//                CommonHelper.showAlertDialog(getActivity(),
+//                        getString(R.string.failed_fetched_data_message));
 
                 // stopping swipe refresh
                 swipeRefreshLayout.setRefreshing(false);
+
+                // Just show a toast message
+                Toast.makeText(getActivity(), getString(R.string.failed_fetched_data_message), Toast.LENGTH_LONG).show();
             }
         }){
             /**
@@ -331,11 +334,14 @@ public class PopularChannelCardFragment extends Fragment implements SwipeRefresh
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Server Error: " + error.getMessage());
 
-                CommonHelper.showAlertDialog(getActivity(),
-                        getString(R.string.failed_fetched_data_message));
+//                CommonHelper.showAlertDialog(getActivity(),
+//                        getString(R.string.failed_fetched_data_message));
 
                 // stopping swipe refresh
                 swipeRefreshLayout.setRefreshing(false);
+
+                // Just show a toast message
+                Toast.makeText(getActivity(), getString(R.string.failed_fetched_data_message), Toast.LENGTH_LONG).show();
             }
         }){
             /**

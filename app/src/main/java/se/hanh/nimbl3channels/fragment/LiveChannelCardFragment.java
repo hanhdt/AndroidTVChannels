@@ -268,10 +268,11 @@ public class LiveChannelCardFragment extends Fragment implements
                         // stopping swipe refresh
                         swipeRefreshLayout.setRefreshing(false);
 
-                        CommonHelper.showAlertDialog(getActivity(),
-                                getString(R.string.failed_fetched_data_message));
+//                        CommonHelper.showAlertDialog(getActivity(),
+//                                getString(R.string.failed_fetched_data_message));
 
-
+                        // Just show a toast message
+                        Toast.makeText(getActivity(), getString(R.string.failed_fetched_data_message), Toast.LENGTH_LONG).show();
                     }
                 }){
                     /**
@@ -357,10 +358,11 @@ public class LiveChannelCardFragment extends Fragment implements
                         // stopping swipe refresh
                         swipeRefreshLayout.setRefreshing(false);
 
-                        CommonHelper.showAlertDialog(getActivity(),
-                                getString(R.string.failed_fetched_data_message));
+//                        CommonHelper.showAlertDialog(getActivity(),
+//                                getString(R.string.failed_fetched_data_message));
 
-
+                        // Just show a toast message
+                        Toast.makeText(getActivity(), getString(R.string.failed_fetched_data_message), Toast.LENGTH_LONG).show();
                     }
                 }){
                     /**
