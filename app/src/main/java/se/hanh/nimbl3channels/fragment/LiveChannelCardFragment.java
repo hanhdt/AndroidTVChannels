@@ -2,7 +2,9 @@ package se.hanh.nimbl3channels.fragment;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -130,7 +132,15 @@ public class LiveChannelCardFragment extends Fragment implements
                 Log.d(LiveChannelCardFragment.TAG, "Page + Total Items: " + page + "+" + totalItemsCount);
                 // Check connection first
                 if(CommonHelper.hasConnection()){
-                    loadMoreChannelFromAPI(offSet, totalItemsCount);
+                    // Check preferences
+                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
+                    boolean updateLiveChannelPref = sharedPreferences.getBoolean("updateLiveChannels", false);
+                    if(updateLiveChannelPref){
+                        loadMoreChannelFromAPI(offSet, totalItemsCount);
+                    }
+                    else{
+                        Toast.makeText(getActivity(), getString(R.string.sync_data_message), Toast.LENGTH_LONG).show();
+                    }
                 }
                 else{
                     CommonHelper.showAlertDialog(getActivity().getApplicationContext(),
@@ -151,10 +161,16 @@ public class LiveChannelCardFragment extends Fragment implements
                                         swipeRefreshLayout.setRefreshing(true);
 
                                         // Check connection first
-                                        if(CommonHelper.hasConnection()){
-                                            fetchChannels();
-                                        }
-                                        else{
+                                        if (CommonHelper.hasConnection()) {
+                                            // Check preferences
+                                            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
+                                            boolean updateLiveChannelPref = sharedPreferences.getBoolean("updateLiveChannels", false);
+                                            if (updateLiveChannelPref) {
+                                                fetchChannels();
+                                            } else {
+                                                Toast.makeText(getActivity(), getString(R.string.sync_data_message), Toast.LENGTH_LONG).show();
+                                            }
+                                        } else {
                                             CommonHelper.showAlertDialog(getActivity(),
                                                     getString(R.string.no_connection_message));
                                         }
@@ -199,7 +215,15 @@ public class LiveChannelCardFragment extends Fragment implements
     public void onRefresh() {
         // Check connection first
         if(CommonHelper.hasConnection()){
-            fetchChannels();
+            // Check preferences
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
+            boolean updateLiveChannelPref = sharedPreferences.getBoolean("updateLiveChannels", false);
+            if(updateLiveChannelPref){
+                fetchChannels();
+            }
+            else{
+                Toast.makeText(getActivity(), getString(R.string.sync_data_message), Toast.LENGTH_LONG).show();
+            }
         }
         else{
             CommonHelper.showAlertDialog(getActivity(),

@@ -1,5 +1,6 @@
 package se.hanh.nimbl3channels.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -78,6 +79,8 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent preferenceIntent = new Intent(this, ChannelPreferencesActivity.class);
+            startActivity(preferenceIntent);
             return true;
         }
 

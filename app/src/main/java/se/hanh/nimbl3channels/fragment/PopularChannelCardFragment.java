@@ -1,7 +1,9 @@
 package se.hanh.nimbl3channels.fragment;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -129,7 +131,23 @@ public class PopularChannelCardFragment extends Fragment implements SwipeRefresh
             public void onLoadMore(int page, int totalItemsCount) {
                 // Triggered only when new data needs to be appended to the list
                 Log.d(PopularChannelCardFragment.TAG, "Page + Total Items: " + page + "+" + totalItemsCount);
-                loadMoreChannelFromAPI(offSet, totalItemsCount);
+                // Check connection first
+                if(CommonHelper.hasConnection()){
+                    // Check preferences
+                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
+                    boolean updatePopularChannelPref = sharedPreferences.getBoolean("updatePopularChannels", false);
+                    if(updatePopularChannelPref){
+                        loadMoreChannelFromAPI(offSet, totalItemsCount);
+                    }
+                    else{
+                        Toast.makeText(getActivity(), getString(R.string.sync_data_message), Toast.LENGTH_LONG).show();
+                    }
+                }
+                else{
+                    CommonHelper.showAlertDialog(getActivity().getApplicationContext(),
+                            getString(R.string.no_connection_message));
+                }
+
             }
         });
 
@@ -144,7 +162,22 @@ public class PopularChannelCardFragment extends Fragment implements SwipeRefresh
                                     public void run() {
                                         swipeRefreshLayout.setRefreshing(true);
 
-                                        fetchPopularChannels();
+                                        // Check connection first
+                                        if(CommonHelper.hasConnection()){
+                                            // Check preferences
+                                            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
+                                            boolean updatePopularChannelPref = sharedPreferences.getBoolean("updatePopularChannels", false);
+                                            if(updatePopularChannelPref){
+                                                fetchPopularChannels();
+                                            }
+                                            else{
+                                                Toast.makeText(getActivity(), getString(R.string.sync_data_message), Toast.LENGTH_LONG).show();
+                                            }
+                                        }
+                                        else{
+                                            CommonHelper.showAlertDialog(getActivity().getApplicationContext(),
+                                                    getString(R.string.no_connection_message));
+                                        }
                                     }
                                 }
         );
@@ -271,7 +304,24 @@ public class PopularChannelCardFragment extends Fragment implements SwipeRefresh
 
     @Override
     public void onRefresh() {
-        fetchPopularChannels();
+
+        // Check connection first
+        if(CommonHelper.hasConnection()){
+            // Check preferences
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
+            boolean updatePopularChannelPref = sharedPreferences.getBoolean("updatePopularChannels", false);
+            if(updatePopularChannelPref){
+                fetchPopularChannels();
+            }
+            else{
+                Toast.makeText(getActivity(), getString(R.string.sync_data_message), Toast.LENGTH_LONG).show();
+            }
+        }
+        else{
+            CommonHelper.showAlertDialog(getActivity().getApplicationContext(),
+                    getString(R.string.no_connection_message));
+        }
+
     }
 
     /**

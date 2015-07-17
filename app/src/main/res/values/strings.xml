@@ -11,4 +11,8 @@
     <string name="empty_response_message">There are no new channels!</string>
     <string name="no_connection_message">Failed loading data! Try check connection!</string>
     <string name="failed_fetched_data_message">Failed loading data! Try again!</string>
+    <string name="sync_data_message">Please turn on updating in the preferences!</string>
+
+    <string name="preference_title">ZEEMI Settings</string>
+    <string name="pref_update_category_title">Update and Sync with API</string>
 </resources>

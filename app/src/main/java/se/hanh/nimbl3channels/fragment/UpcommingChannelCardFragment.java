@@ -3,7 +3,9 @@ package se.hanh.nimbl3channels.fragment;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -131,7 +133,22 @@ public class UpcommingChannelCardFragment extends Fragment implements SwipeRefre
             public void onLoadMore(int page, int totalItemsCount) {
                 // Triggered only when new data needs to be appended to the list
                 Log.d(UpcommingChannelCardFragment.TAG, "Page + Total Items: " + page + "+" + totalItemsCount);
-                loadMoreChannelFromAPI(offSet, totalItemsCount);
+                // Check connection first
+                if(CommonHelper.hasConnection()){
+                    // Check preferences
+                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
+                    boolean updatePopularChannelPref = sharedPreferences.getBoolean("updateUpcomingChannels", false);
+                    if(updatePopularChannelPref){
+                        loadMoreChannelFromAPI(offSet, totalItemsCount);
+                    }
+                    else{
+                        Toast.makeText(getActivity(), getString(R.string.sync_data_message), Toast.LENGTH_LONG).show();
+                    }
+                }
+                else{
+                    CommonHelper.showAlertDialog(getActivity().getApplicationContext(),
+                            getString(R.string.no_connection_message));
+                }
             }
         });
 
@@ -145,8 +162,22 @@ public class UpcommingChannelCardFragment extends Fragment implements SwipeRefre
                                     @Override
                                     public void run() {
                                         swipeRefreshLayout.setRefreshing(true);
-
-                                        fetchUpComingChannels();
+                                        // Check connection first
+                                        if(CommonHelper.hasConnection()){
+                                            // Check preferences
+                                            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
+                                            boolean updatePopularChannelPref = sharedPreferences.getBoolean("updatePopularChannels", false);
+                                            if(updatePopularChannelPref){
+                                                fetchUpComingChannels();
+                                            }
+                                            else{
+                                                Toast.makeText(getActivity(), getString(R.string.sync_data_message), Toast.LENGTH_LONG).show();
+                                            }
+                                        }
+                                        else{
+                                            CommonHelper.showAlertDialog(getActivity().getApplicationContext(),
+                                                    getString(R.string.no_connection_message));
+                                        }
                                     }
                                 }
         );
@@ -273,7 +304,22 @@ public class UpcommingChannelCardFragment extends Fragment implements SwipeRefre
 
     @Override
     public void onRefresh() {
-        fetchUpComingChannels();
+        // Check connection first
+        if(CommonHelper.hasConnection()){
+            // Check preferences
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
+            boolean updatePopularChannelPref = sharedPreferences.getBoolean("updatePopularChannels", false);
+            if(updatePopularChannelPref){
+                fetchUpComingChannels();
+            }
+            else{
+                Toast.makeText(getActivity(), getString(R.string.sync_data_message), Toast.LENGTH_LONG).show();
+            }
+        }
+        else{
+            CommonHelper.showAlertDialog(getActivity().getApplicationContext(),
+                    getString(R.string.no_connection_message));
+        }
     }
 
     /**
