@@ -4,19 +4,20 @@
         android:title="@string/pref_update_category_title"
         android:key="prefKeyUpdateSettings">
 
-        <CheckBoxPreference android:title="Update Live Channels"
+        <SwitchPreference android:title="Update Live Channels"
             android:defaultValue="true"
             android:summary="This option if selected will allow the application to check for live channels."
             android:key="updateLiveChannels" />
 
-        <CheckBoxPreference android:title="Update Upcoming Channels"
+        <SwitchPreference android:title="Update Upcoming Channels"
             android:defaultValue="true"
             android:summary="This option if selected will allow the application to check for upcoming channels."
             android:key="updateUpcomingChannels" />
 
-        <CheckBoxPreference android:title="Update Popular Channels"
+        <SwitchPreference android:title="Update Popular Channels"
             android:defaultValue="true"
             android:summary="This option if selected will allow the application to check for popular channels."
             android:key="updatePopularChannels" />
+
     </PreferenceCategory>
 </PreferenceScreen>

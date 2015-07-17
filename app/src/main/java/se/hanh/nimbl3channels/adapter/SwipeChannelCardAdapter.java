@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.media.Image;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -134,11 +135,17 @@ public class SwipeChannelCardAdapter extends BaseAdapter {
         }
 
         // Setting channel type (LIVE or not LIVE)
-        if(channelList.get(position).getTypeOfChannel() == 1){
+        if(channelList.get(position).getTypeOfChannel() == 1
+                || channelList.get(position).getTypeOfChannel() == 2
+                || channelList.get(position).getTypeOfChannel() == 3){
             mChannelType.setImageResource(android.R.color.holo_red_light);
+            Log.d(SwipeChannelCardAdapter.class.getSimpleName(), "Channel Status: "
+                    + channelList.get(position).getTypeOfChannel());
         }
         else{
             mChannelType.setImageResource(android.R.color.holo_green_dark);
+            Log.d(SwipeChannelCardAdapter.class.getSimpleName(), "Channel Status: "
+                    + channelList.get(position).getTypeOfChannel());
         }
         return convertView;
     }

@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import se.hanh.nimbl3channels.R;
 
@@ -227,8 +228,8 @@ public class PopularChannelCardFragment extends Fragment implements SwipeRefresh
                                     String username = userInfo.getString("username");
                                     String profilePic = userInfo.getString("profile_picture");
                                     ChannelCard m = new ChannelCard(coverImage, title, username, rating, followers, profilePic);
-                                    // Set type of channel for popular channels
-                                    m.setTypeOfChannel(3);
+                                    // Set type of channel for popular channels which define the channel is available or not
+                                    m.setTypeOfChannel((new Random().nextInt(5) + 1));
                                     channelList.add(m);
 
                                 } catch (JSONException e) {
@@ -339,8 +340,8 @@ public class PopularChannelCardFragment extends Fragment implements SwipeRefresh
                                     int followers = channelObj.getInt("followers_count");
                                     String profilePic = userInfo.getString("profile_picture");
                                     ChannelCard m = new ChannelCard(coverImage, title, username, rating, followers, profilePic);
-                                    // Set type of channel for popular channels
-                                    m.setTypeOfChannel(3);
+                                    // Set type of channel for popular channels which define the channel is available or not
+                                    m.setTypeOfChannel((new Random().nextInt(5) + 1));
                                     channelList.add(0, m);
 
 
