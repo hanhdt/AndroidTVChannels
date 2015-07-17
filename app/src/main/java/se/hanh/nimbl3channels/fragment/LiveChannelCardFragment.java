@@ -139,7 +139,7 @@ public class LiveChannelCardFragment extends Fragment implements
                         loadMoreChannelFromAPI(offSet, totalItemsCount);
                     }
                     else{
-                        Toast.makeText(getActivity(), getString(R.string.sync_data_message), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), getString(R.string.live_tab_title) + ": " + getString(R.string.sync_data_message), Toast.LENGTH_LONG).show();
                     }
                 }
                 else{
@@ -168,7 +168,7 @@ public class LiveChannelCardFragment extends Fragment implements
                                             if (updateLiveChannelPref) {
                                                 fetchChannels();
                                             } else {
-                                                Toast.makeText(getActivity(), getString(R.string.sync_data_message), Toast.LENGTH_LONG).show();
+                                                Toast.makeText(getActivity(), getString(R.string.live_tab_title) + ": " + getString(R.string.sync_data_message), Toast.LENGTH_LONG).show();
                                             }
                                         } else {
                                             CommonHelper.showAlertDialog(getActivity(),
@@ -222,7 +222,7 @@ public class LiveChannelCardFragment extends Fragment implements
                 fetchChannels();
             }
             else{
-                Toast.makeText(getActivity(), getString(R.string.sync_data_message), Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), getString(R.string.live_tab_title) + ": " + getString(R.string.sync_data_message), Toast.LENGTH_LONG).show();
             }
         }
         else{

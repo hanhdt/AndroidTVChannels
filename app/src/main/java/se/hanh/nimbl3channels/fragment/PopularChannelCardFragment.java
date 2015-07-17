@@ -140,11 +140,11 @@ public class PopularChannelCardFragment extends Fragment implements SwipeRefresh
                         loadMoreChannelFromAPI(offSet, totalItemsCount);
                     }
                     else{
-                        Toast.makeText(getActivity(), getString(R.string.sync_data_message), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), getString(R.string.popular_tab_title) + ": " + getString(R.string.sync_data_message), Toast.LENGTH_LONG).show();
                     }
                 }
                 else{
-                    CommonHelper.showAlertDialog(getActivity().getApplicationContext(),
+                    CommonHelper.showAlertDialog(getActivity(),
                             getString(R.string.no_connection_message));
                 }
 
@@ -171,11 +171,11 @@ public class PopularChannelCardFragment extends Fragment implements SwipeRefresh
                                                 fetchPopularChannels();
                                             }
                                             else{
-                                                Toast.makeText(getActivity(), getString(R.string.sync_data_message), Toast.LENGTH_LONG).show();
+                                                Toast.makeText(getActivity(), getString(R.string.popular_tab_title) + ": " + getString(R.string.sync_data_message), Toast.LENGTH_LONG).show();
                                             }
                                         }
                                         else{
-                                            CommonHelper.showAlertDialog(getActivity().getApplicationContext(),
+                                            CommonHelper.showAlertDialog(getActivity(),
                                                     getString(R.string.no_connection_message));
                                         }
                                     }
@@ -314,11 +314,11 @@ public class PopularChannelCardFragment extends Fragment implements SwipeRefresh
                 fetchPopularChannels();
             }
             else{
-                Toast.makeText(getActivity(), getString(R.string.sync_data_message), Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), getString(R.string.popular_tab_title) + ": " + getString(R.string.sync_data_message), Toast.LENGTH_LONG).show();
             }
         }
         else{
-            CommonHelper.showAlertDialog(getActivity().getApplicationContext(),
+            CommonHelper.showAlertDialog(getActivity(),
                     getString(R.string.no_connection_message));
         }
 

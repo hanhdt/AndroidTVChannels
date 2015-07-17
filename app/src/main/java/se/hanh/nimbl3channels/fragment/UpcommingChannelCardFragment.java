@@ -142,11 +142,11 @@ public class UpcommingChannelCardFragment extends Fragment implements SwipeRefre
                         loadMoreChannelFromAPI(offSet, totalItemsCount);
                     }
                     else{
-                        Toast.makeText(getActivity(), getString(R.string.sync_data_message), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), getString(R.string.upcoming_tab_title) + ": " + getString(R.string.sync_data_message), Toast.LENGTH_LONG).show();
                     }
                 }
                 else{
-                    CommonHelper.showAlertDialog(getActivity().getApplicationContext(),
+                    CommonHelper.showAlertDialog(getActivity(),
                             getString(R.string.no_connection_message));
                 }
             }
@@ -171,11 +171,11 @@ public class UpcommingChannelCardFragment extends Fragment implements SwipeRefre
                                                 fetchUpComingChannels();
                                             }
                                             else{
-                                                Toast.makeText(getActivity(), getString(R.string.sync_data_message), Toast.LENGTH_LONG).show();
+                                                Toast.makeText(getActivity(), getString(R.string.upcoming_tab_title) + ": " + getString(R.string.sync_data_message), Toast.LENGTH_LONG).show();
                                             }
                                         }
                                         else{
-                                            CommonHelper.showAlertDialog(getActivity().getApplicationContext(),
+                                            CommonHelper.showAlertDialog(getActivity(),
                                                     getString(R.string.no_connection_message));
                                         }
                                     }
@@ -313,11 +313,11 @@ public class UpcommingChannelCardFragment extends Fragment implements SwipeRefre
                 fetchUpComingChannels();
             }
             else{
-                Toast.makeText(getActivity(), getString(R.string.sync_data_message), Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), getString(R.string.upcoming_tab_title) + ": " + getString(R.string.sync_data_message), Toast.LENGTH_LONG).show();
             }
         }
         else{
-            CommonHelper.showAlertDialog(getActivity().getApplicationContext(),
+            CommonHelper.showAlertDialog(getActivity(),
                     getString(R.string.no_connection_message));
         }
     }
