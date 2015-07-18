@@ -16,4 +16,13 @@
 
     <string name="preference_title">ZEEMI Settings</string>
     <string name="pref_update_category_title">Update and Sync with APIs</string>
+
+    <string name="switch_live_summary_text_on">This option if selected will allow the application to check for live channels.\nON</string>
+    <string name="switch_live_summary_text_off">This option if selected will allow the application to check for live channels.\nOFF</string>
+
+    <string name="switch_upcoming_summary_text_on">This option if selected will allow the application to check for live channels.\nON</string>
+    <string name="switch_upcoming_summary_text_off">This option if selected will allow the application to check for live channels.\nOFF</string>
+
+    <string name="switch_popular_summary_text_on">This option if selected will allow the application to check for live channels.\nON</string>
+    <string name="switch_popular_summary_text_off">This option if selected will allow the application to check for live channels.\nOFF</string>
 </resources>

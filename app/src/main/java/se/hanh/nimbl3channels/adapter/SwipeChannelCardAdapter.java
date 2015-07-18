@@ -2,9 +2,6 @@ package se.hanh.nimbl3channels.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
-import android.media.Image;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +10,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.NetworkImageView;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -139,13 +132,9 @@ public class SwipeChannelCardAdapter extends BaseAdapter {
                 || channelList.get(position).getTypeOfChannel() == 2
                 || channelList.get(position).getTypeOfChannel() == 3){
             mChannelType.setImageResource(android.R.color.holo_red_light);
-            Log.d(SwipeChannelCardAdapter.class.getSimpleName(), "Channel Status: "
-                    + channelList.get(position).getTypeOfChannel());
         }
         else{
             mChannelType.setImageResource(android.R.color.holo_green_dark);
-            Log.d(SwipeChannelCardAdapter.class.getSimpleName(), "Channel Status: "
-                    + channelList.get(position).getTypeOfChannel());
         }
         return convertView;
     }

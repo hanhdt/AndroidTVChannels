@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
-        android:title="@string/pref_update_category_title"
-        android:key="prefKeyUpdateSettings">
+        android:key="prefKeyUpdateSettings"
+        android:title="@string/pref_update_category_title">
 
-        <SwitchPreference android:title="Update Live Channels"
+        <SwitchPreference
             android:defaultValue="true"
-            android:summary="This option if selected will allow the application to check for live channels."
-            android:key="updateLiveChannels" />
+            android:key="updateLiveChannels"
+            android:summaryOff="@string/switch_live_summary_text_off"
+            android:summaryOn="@string/switch_live_summary_text_on"
+            android:title="Update Live Channels" />
 
-        <SwitchPreference android:title="Update Upcoming Channels"
+        <SwitchPreference
             android:defaultValue="true"
-            android:summary="This option if selected will allow the application to check for upcoming channels."
-            android:key="updateUpcomingChannels" />
+            android:key="updateUpcomingChannels"
+            android:summaryOff="@string/switch_upcoming_summary_text_off"
+            android:summaryOn="@string/switch_upcoming_summary_text_on"
+            android:title="Update Upcoming Channels" />
 
-        <SwitchPreference android:title="Update Popular Channels"
+        <SwitchPreference
             android:defaultValue="true"
-            android:summary="This option if selected will allow the application to check for popular channels."
-            android:key="updatePopularChannels" />
+            android:key="updatePopularChannels"
+            android:summaryOff="@string/switch_popular_summary_text_off"
+            android:summaryOn="@string/switch_popular_summary_text_on"
+            android:title="Update Popular Channels" />
 
     </PreferenceCategory>
 </PreferenceScreen>
