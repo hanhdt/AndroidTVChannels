@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_settings"/>
+
+</menu><!-- From: file:/D:/android_dev/Nimbl3Channels/request-manager/src/main/res/menu/main.xml --><!-- From: file:/D:/android_dev/Nimbl3Channels/request-manager/build/intermediates/bundles/debug/res/menu/main.xml -->
