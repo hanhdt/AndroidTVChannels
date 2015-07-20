@@ -3,6 +3,8 @@ package se.hanh.nimbl3channels.fragment;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -48,10 +50,6 @@ public class UpcommingChannelCardFragment extends Fragment implements SwipeRefre
         AdapterView.OnItemClickListener{
 
     public static final String TAG = UpcommingChannelCardFragment.class.getSimpleName();
-
-    private String ACCESS_TOKEN = "9008ab338d1beba78b8914124d64d461a9a9253894b29ea5cd70a0cf9c955177";
-
-    private String URL_UPCOMING_CHANNEL = "http://api-staging.zeemi.tv/1/channels/upcoming.json?access_token=" + ACCESS_TOKEN + "&page=";
 
     /**
      * The fragment's ListView/GridView.
@@ -120,6 +118,14 @@ public class UpcommingChannelCardFragment extends Fragment implements SwipeRefre
         @Override
         public void onError(VolleyError error) {
             Log.e(TAG, "Server Error: " + error.getMessage());
+
+            Looper.prepare();
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(NimbleApplication.getContext(), getString(R.string.failed_fetched_data_message), Toast.LENGTH_LONG).show();
+                }
+            });
         }
     };
 
@@ -256,7 +262,7 @@ public class UpcommingChannelCardFragment extends Fragment implements SwipeRefre
         swipeRefreshLayout.setRefreshing(true);
 
         //Queue use default volley Response and Error listener
-        com.ym.volley.RequestManager
+        RequestManager
                 .queue()
                 .useBackgroundQueue()
                 .addRequest(new UpcomingChannelJsonRequest(offSet++), mRequestCallback)

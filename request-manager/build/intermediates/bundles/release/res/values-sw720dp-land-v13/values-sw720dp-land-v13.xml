@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/D:/android_dev/Nimbl3Channels/request-manager/src/main/res/values-sw720dp-land/dimens.xml -->
+    <!-- From: file:/D:/Hanh/android_dev/workspace/AndroidTVChannels/request-manager/src/main/res/values-sw720dp-land/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">128dp</dimen>
 </resources>

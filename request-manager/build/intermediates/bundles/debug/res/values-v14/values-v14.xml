@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/D:/android_dev/Nimbl3Channels/request-manager/src/main/res/values-v14/styles.xml -->
+    <!-- From: file:/D:/Hanh/android_dev/workspace/AndroidTVChannels/request-manager/src/main/res/values-v14/styles.xml -->
     <eat-comment/>
     <style name="AppBaseTheme" parent="android:Theme.Holo.Light.DarkActionBar">
         <!-- API 14 theme customizations can go here. -->

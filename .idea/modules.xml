@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Nimbl3Channels.iml" filepath="$PROJECT_DIR$/Nimbl3Channels.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AndroidTVChannels.iml" filepath="$PROJECT_DIR$/AndroidTVChannels.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/request-manager/request-manager.iml" filepath="$PROJECT_DIR$/request-manager/request-manager.iml" />
     </modules>

@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="debug"><source path="D:\android_dev\Nimbl3Channels\request-manager\build\intermediates\bundles\debug\assets"/></dataSet><dataSet config="main"><source path="D:\android_dev\Nimbl3Channels\request-manager\src\androidTest\assets"/></dataSet></merger>
+<merger version="3"><dataSet config="debug"><source path="D:\Hanh\android_dev\workspace\AndroidTVChannels\request-manager\build\intermediates\bundles\debug\assets"/></dataSet><dataSet config="main"><source path="D:\Hanh\android_dev\workspace\AndroidTVChannels\request-manager\src\androidTest\assets"/></dataSet></merger>

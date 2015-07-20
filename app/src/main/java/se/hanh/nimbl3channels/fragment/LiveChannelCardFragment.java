@@ -3,6 +3,8 @@ package se.hanh.nimbl3channels.fragment;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -48,6 +50,7 @@ public class LiveChannelCardFragment extends Fragment implements
         SwipeRefreshLayout.OnRefreshListener, AdapterView.OnItemClickListener {
 
     public static final String TAG = LiveChannelCardFragment.class.getSimpleName();
+
     // initially offset will be 0, later will be updated while parsing the json
     protected int offSet = 1;
     /**
@@ -60,8 +63,11 @@ public class LiveChannelCardFragment extends Fragment implements
      * Views.
      */
     private SwipeChannelCardAdapter adapter;
+
     private List<ChannelCard> channelList;
+
     private OnFragmentInteractionListener mListener;
+
     private RequestCallback mRequestCallback = new RequestCallback<JSONArray, Integer>() {
         @Override
         public Integer doInBackground(JSONArray response) {
@@ -111,6 +117,14 @@ public class LiveChannelCardFragment extends Fragment implements
         @Override
         public void onError(VolleyError error) {
             Log.e(TAG, "Server Error: " + error.getMessage());
+
+            Looper.prepare();
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(NimbleApplication.getContext(), getString(R.string.failed_fetched_data_message), Toast.LENGTH_LONG).show();
+                }
+            });
         }
     };
 
