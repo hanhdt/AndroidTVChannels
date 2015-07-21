@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.squareup.leakcanary.RefWatcher;
 import com.ym.volley.RequestCallback;
 
 import org.json.JSONArray;
@@ -148,6 +149,13 @@ public class PopularChannelCardFragment extends Fragment implements SwipeRefresh
 
         // init Request manager
         com.ym.volley.RequestManager.initializeWith(getActivity());
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        RefWatcher refWatcher = NimbleApplication.getRefWatcher(getActivity());
+        refWatcher.watch(this);
     }
 
     @Override

@@ -10,8 +10,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.squareup.leakcanary.RefWatcher;
+
 import se.hanh.nimbl3channels.R;
 import se.hanh.nimbl3channels.adapter.PagerAdapter;
+import se.hanh.nimbl3channels.app.NimbleApplication;
 import se.hanh.nimbl3channels.fragment.LiveChannelCardFragment;
 import se.hanh.nimbl3channels.fragment.PopularChannelCardFragment;
 import se.hanh.nimbl3channels.fragment.UpcommingChannelCardFragment;
@@ -61,6 +64,13 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RefWatcher refWatcher = NimbleApplication.getRefWatcher(MainActivity.this);
+        refWatcher.watch(this);
     }
 
     @Override

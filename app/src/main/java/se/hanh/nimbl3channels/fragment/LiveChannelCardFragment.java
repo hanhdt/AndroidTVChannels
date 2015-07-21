@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.squareup.leakcanary.RefWatcher;
 import com.ym.volley.RequestCallback;
 import com.ym.volley.RequestManager;
 
@@ -150,6 +151,13 @@ public class LiveChannelCardFragment extends Fragment implements
 
         // Init request manager
         RequestManager.initializeWith(getActivity());
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        RefWatcher refWatcher = NimbleApplication.getRefWatcher(getActivity());
+        refWatcher.watch(this);
     }
 
     @Override
