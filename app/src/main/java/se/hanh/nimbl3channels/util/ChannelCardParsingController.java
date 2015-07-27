@@ -31,7 +31,7 @@ public class ChannelCardParsingController {
     public void init(){
         try
         {
-            jp = jsonFactory.createJsonParser(channelCardsJSON);
+            jp = jsonFactory.createParser(channelCardsJSON);
             channelCardsMap = objectMapper.readValue(jp, ChannelCards.class);
             channelCards = channelCardsMap.get(0);
         }

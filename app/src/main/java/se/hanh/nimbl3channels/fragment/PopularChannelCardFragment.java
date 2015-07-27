@@ -34,6 +34,7 @@ import se.hanh.nimbl3channels.adapter.SwipeChannelCardAdapter;
 import se.hanh.nimbl3channels.app.NimbleApplication;
 import se.hanh.nimbl3channels.request.PopularChannelJsonRequest;
 import se.hanh.nimbl3channels.util.ChannelCard;
+import se.hanh.nimbl3channels.util.ChannelCardParsingController;
 import se.hanh.nimbl3channels.util.CommonHelper;
 import se.hanh.nimbl3channels.util.InfiniteScrollListener;
 
@@ -73,28 +74,33 @@ public class PopularChannelCardFragment extends Fragment implements SwipeRefresh
             Log.d(PopularChannelCardFragment.TAG, response.toString());
 
             if (response.length() > 0) {
+                ChannelCardParsingController channelParser = new ChannelCardParsingController(response.toString());
+                channelParser.init();
+                channelList.addAll(channelParser.findAll());
 
                 // looping through json and adding to movies list
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        JSONObject channelObj = response.getJSONObject(i);
+//                for (int i = 0; i < response.length(); i++) {
+//                    try {
+//                        JSONObject channelObj = response.getJSONObject(i);
+//
+//                        String coverImage = channelObj.getString("cover_image");
+//                        int rating = channelObj.getInt("rating");
+//                        String title = channelObj.getString("name");
+//                        int followers = channelObj.getInt("followers_count");
 
-                        String coverImage = channelObj.getString("cover_image");
-                        int rating = channelObj.getInt("rating");
-                        String title = channelObj.getString("name");
-                        int followers = channelObj.getInt("followers_count");
-                        JSONObject userInfo = channelObj.getJSONObject("user");
-                        String username = userInfo.getString("username");
-                        String profilePic = userInfo.getString("profile_picture");
-                        ChannelCard m = new ChannelCard(coverImage, title, username, rating, followers, profilePic);
-                        // Set type of channel for upcoming channels which define the channel is available or not
-                        m.setTypeOfChannel((new Random().nextInt(5) + 1));
-                        channelList.add(m);
+//                        JSONObject userInfo = channelObj.getJSONObject("user");
+//                        String username = userInfo.getString("username");
+//                        String profilePic = userInfo.getString("profile_picture");
+//                        ChannelCard m = new ChannelCard(coverImage, title, username, rating, followers, profilePic);
 
-                    } catch (JSONException e) {
-                        Log.e(TAG, "JSON Parsing error: " + e.getMessage());
-                    }
-                }
+//                        // Set type of channel for upcoming channels which define the channel is available or not
+//                        m.setTypeOfChannel((new Random().nextInt(5) + 1));
+//                        channelList.add(m);
+//
+//                    } catch (JSONException e) {
+//                        Log.e(TAG, "JSON Parsing error: " + e.getMessage());
+//                    }
+//                }
             }
 
             return response.length();
