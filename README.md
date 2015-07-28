@@ -1,0 +1,3 @@
+# AndroidTVChannels
+
+This is a Android app for integrating TV Channels web service APIs, Auto Data-Refresh Scrolling, Auto Data-Refresh Swipe,...
